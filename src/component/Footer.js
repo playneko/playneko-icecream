@@ -11,6 +11,10 @@ import PersonAdd from '@material-ui/icons/PersonAdd';
 import LibraryAdd from '@material-ui/icons/LibraryAdd';
 import LibraryBooks from '@material-ui/icons/LibraryBooks';
 
+// 컴포넌트
+// 흔적 남기기
+import Tracking from "./Tracking";
+
 const useStyles = makeStyles((theme) => ({
   fabButton: {
     zIndex: 1,
@@ -37,6 +41,7 @@ const Footer = (props) => {
   const classes = useStyles();
   const { account, gpsFlg, setGpsFlg } = props;
   const [addopen, setAddopen] = React.useState(false);
+  const [tracking, setTracking] = React.useState(false);
 
   const handleOnGps = () => {
     setGpsFlg(9);
@@ -52,6 +57,12 @@ const Footer = (props) => {
     addopen ? setAddopen(false) : setAddopen(true);
   }
 
+  // 흔적 남기기
+  const handleOnTracking = () => {
+    setAddopen(false);
+    setTracking(true);
+  }
+
   // 링크 페이지로 이동
   const handleOnLink = (link) => {
     history.push(link);
@@ -59,6 +70,12 @@ const Footer = (props) => {
 
   return (
     <>
+      <div
+        className="footer-tracking_form"
+        style={tracking ? {display: "block"} : {display: "none"}}
+      >
+        <Tracking account={account} setTracking={setTracking} />
+      </div>
       <div
         className="footer-add_form"
         style={addopen ? {display: "block"} : {display: "none"}}
@@ -71,7 +88,7 @@ const Footer = (props) => {
           <Person />
           친구목록
         </Button>{' '}
-        <Button variant="contained" color="primary" type="button" className="footer-button_library_add">
+        <Button variant="contained" color="primary" type="button" className="footer-button_library_add" onClick={() => handleOnTracking()}>
           <LibraryAdd />
           흔적 남기기
         </Button>{' '}
@@ -80,9 +97,13 @@ const Footer = (props) => {
           내가 남긴 흔적
         </Button>
       </div>
-      <Fab color="secondary" className={classes.fabButton + " footer-fab_add"} onClick={() => handleOnAddForm()}>
-        <AddIcon />
-      </Fab>
+      {
+        tracking ?
+          "" :
+          <Fab color="secondary" className={classes.fabButton + " footer-fab_add"} onClick={() => handleOnAddForm()}>
+            <AddIcon />
+          </Fab>
+      }
       {
         gpsFlg < 1 ?
           <Fab color="secondary" className={classes.absolute1 + " footer-fab_gps"} onClick={() => handleOnGps()}>

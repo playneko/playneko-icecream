@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Marker = (props) => {
+const MarkerUser = (props) => {
     const colorList = [
         "#ff4c6d", "#3d5afe", "#66bb6a", "#ff8a80",
         "#bdbdbd", "#ef5350", "#ec407a", "#26a69a",
@@ -38,4 +38,4 @@ const Marker = (props) => {
     );
 };
 
-export default Marker;
+export default MarkerUser;

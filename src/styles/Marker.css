@@ -10,6 +10,69 @@
     margin: -43px 0 0 -30px;
 }
 
+.pin_tracking {
+    width: 50px;
+    height: 50px;
+    border-radius: 50% 50% 50% 0;
+    background: #795548;
+    position: absolute;
+    transform: rotate(-45deg);
+    left: 50%;
+    top: 50%;
+    margin: -43px 0 0 -30px;
+}
+
+.pin_tracking_icon {
+    content: "";
+    width: 40px;
+    height: 40px;
+    margin: 4px 0 0 6px;
+    position: absolute;
+    border-radius: 50%;
+    color: #ffffff;
+    padding-top: 2px;
+    text-align: center;
+    transform: rotate(45deg);
+}
+
+.pin_tracking_icon > svg {
+    font-size: 2.5rem;
+}
+
+/* .pin_tracking {
+    width: 50px;
+    height: 50px;
+    border-radius: 50% 50% 50% 0;
+    background: #ffffff;
+    position: absolute;
+    transform: rotate(-45deg);
+    left: 50%;
+    top: 50%;
+    margin: -43px 0 0 -30px;
+    box-shadow: 4px 4px 0px -1px rgb(0 0 0 / 20%), 0px 0px 0px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%);
+}
+
+.pin_tracking_box {
+    content: "";
+    width: 100px;
+    height: 70px;
+    margin: -15px 0 0 -15px;
+    background: #ffffff;
+    position: absolute;
+    border-radius: 8px;
+    transform: rotate(45deg);
+    box-shadow: 4px 1px 0px -1px rgb(0 0 0 / 20%), 0px 0px 0px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%);
+}
+
+.pin_tracking_img {
+    margin: 5px;
+    width: 90px;
+    height: 50px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+} */
+
 .pin_popup {
     top: -68px;
     left: 50%;
@@ -44,6 +107,19 @@
 }
 
 .pulse {
+    background: #d6d4d4;
+    border-radius: 50%;
+    height: 14px;
+    width: 14px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: 11px 0px 0px -12px;
+    transform: rotateX(55deg);
+    z-index: -2;
+}
+
+.pulse_tracking {
     background: #d6d4d4;
     border-radius: 50%;
     height: 14px;

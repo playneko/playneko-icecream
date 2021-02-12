@@ -7,6 +7,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import EcoIcon from '@material-ui/icons/Eco';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
@@ -103,6 +104,10 @@ const Header = (props) => {
             <MenuIcon />
           </IconButton>
         </Toolbar>
+        <div className="header-root_mile">
+          <span><EcoIcon /></span>
+          <span>0</span>
+        </div>
       </AppBar>
       <Drawer
         className={classes.drawer}

@@ -16,6 +16,31 @@ button:focus {
     border-radius: 10px !important;
 }
 
+.header-root_mile {
+    top: 10px;
+    right: 10px;
+    padding: 2px;
+    width: 100px;
+    height: 27px;
+    border-radius: 7px;
+    color: #3f51b5;
+    position: absolute;
+    background: #ffffff;
+    box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%);
+}
+
+.header-root_mile > span:first-child {
+    float: left;
+    height: 15px;
+    padding-right: 5px;
+}
+
+.header-root_mile > span:last-child {
+    float: right;
+    padding-right: 5px;
+    vertical-align: middle;
+}
+
 .footer-fab_add {
     background: #f73ca3 !important;
     width: 50px !important;
@@ -63,6 +88,22 @@ button:focus {
 .footer-add_form > button {
     width: 140px;
     margin-bottom: 7px;
+}
+
+.footer-tracking_form {
+    left: 0;
+    right: 0;
+    top: 100px;
+    width: 350px;
+    height: 315px;
+    padding: 13px;
+    z-index: 1;
+    margin: 0 auto;
+    border-radius: 8px;
+    text-align: center;
+    position: absolute;
+    background: #ffffff;
+    box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%);
 }
 
 .footer-button_library_add, .footer-button_library_books {
@@ -119,6 +160,37 @@ button:focus {
 .login-form > div.alert, .registry-form > div.alert {
     margin-right: 25px;
     margin-left: 25px;
+}
+
+.people-add_div {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.people-add_div > form > div {
+    width: calc(100vw - 30vw);
+}
+
+.tracking-title, .tracking-content {
+    width: 100% !important;
+    margin-bottom: 10px !important;
+}
+
+.tracking-upload {
+    text-align: left;
+    margin-bottom: 10px !important;
+}
+
+.tracking-upload > button {
+    width: 100%;
+    background: #cddc39;
+}
+
+.tracking-upload_success > img {
+    width: auto;
+    height: auto;
+    max-width: 150px;
+    max-height: 50px;
 }
 
 .notfound-color_red {

@@ -2,12 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import firebase from "firebase";
 
 // 컴포넌트
-// Header
-import Header from "./component/Header";
 // 로그인
 import Login from "./component/Login";
 // 맵 데이터 처리
@@ -94,15 +91,6 @@ function App() {
         <main
           className={account.auth ? classes.content : ""}
         >
-          <div className={classes.drawerHeader} />
-          {
-            account.auth ?
-              <>
-                <CssBaseline />
-                <Header params={account} />
-              </>
-            : ""
-          }
           <Switch>
           {
             account.auth && account.user ?
