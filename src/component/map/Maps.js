@@ -1,30 +1,23 @@
 import React from 'react'
 import GoogleMapReact from 'google-map-react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import firebase from "firebase";
 
 // 컴포넌트
 // 공통 처리
-import IsEmpty from "./common/IsEmpty";
-// Header
-import Header from "./Header";
-// Footer
-import Footer from "./Footer";
-// 마커
-import MarkerUser from "./MarkerUser";
-// 흔적
-import MarkerTracking from "./MarkerTracking";
+import IsEmpty from "../common/IsEmpty";
 // 좌표 취득
-import Geolocation from "./Geolocation";
+import Geolocation from "../common/Geolocation";
+// Header
+import Header from "../Header";
+// Footer
+import Footer from "../Footer";
+// 마커
+import MarkerUser from "../marker/MarkerUser";
+// 흔적
+import MarkerTracking from "../marker/MarkerTracking";
 // 모델
-import TrackingGetModel from "../models/TrackingGetModel";
-
-const UpdateUserInfo = (account, setUpdate) => {
-    let db = firebase.database();
-    let ref = db.ref("/users").child(account.uid);
-    ref.set(account);
-    setUpdate(false);
-}
+import UpdateUserInfoFire from "../../models/UpdateUserInfoFire";
+import TrackingGetModel from "../../models/TrackingGetModel";
 
 // 좌표값 비교후 갱신
 const DiffLocation = (myLocation, account, update, setAccount, setUpdate) => {
@@ -39,9 +32,11 @@ const DiffLocation = (myLocation, account, update, setAccount, setUpdate) => {
     }
 
     if (update === true && !IsEmpty(account.lat) && !IsEmpty(account.lng)
-        && (account.lat === myLocation.lat && account.lng === myLocation.lng)) {
+        && (account.lat === myLocation.lat && account.lng === myLocation.lng)
+        && (account.lat > 0 && account.lng > 0)) {
+        console.log(account);
         // 좌표 갱신처리
-        UpdateUserInfo(account, setUpdate);
+        UpdateUserInfoFire(account, setUpdate);
     }
 }
 
@@ -91,7 +86,7 @@ const Maps = (props) => {
     return (
         <>
             <CssBaseline />
-            {!loading && <Header params={account} />}
+            {!loading && <Header account={account} />}
             <div style={{ height: 'calc(100vh - 13vh)', width: '100%' }}>
             {
                 loading ?

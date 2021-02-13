@@ -11,7 +11,7 @@ import firebase from "firebase";
 
 // 컴포넌트
 // 모델
-import TrackingAddModel from "../models/TrackingAddModel";
+import TrackingAddModel from "../../models/TrackingAddModel";
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;

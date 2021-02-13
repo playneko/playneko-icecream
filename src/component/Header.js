@@ -73,7 +73,7 @@ const Header = (props) => {
   const theme = useTheme();
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const userData = props.params;
+  const { account } = props;
 
   // 네비게이션 열기
   const handleDrawerOpen = () => {
@@ -106,7 +106,7 @@ const Header = (props) => {
         </Toolbar>
         <div className="header-root_mile">
           <span><EcoIcon /></span>
-          <span>0</span>
+          <span>{account.mile ? account.mile : 0}</span>
         </div>
       </AppBar>
       <Drawer
@@ -125,7 +125,7 @@ const Header = (props) => {
         </div>
         <div className={classes.toolbar} />
         <Divider />
-        <Navibar params={userData} />
+        <Navibar account={account} />
       </Drawer>
     </div>
   );

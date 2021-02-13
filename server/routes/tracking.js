@@ -19,6 +19,8 @@ router.post('/tracking/get', [
     sql += " (6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance ";
     sql += " FROM icecream_tracking ";
     sql += " HAVING distance < 10 ";
+    sql += " ORDER BY no DESC ";
+    sql += " LIMIT 0, 20 ";
     let params = [body.lat, body.lng, body.lat];
 
     connection.query(sql, params, (error, rows, fields) => {

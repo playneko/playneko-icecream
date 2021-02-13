@@ -13,10 +13,10 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 // 컴포넌트
-// Firebase
-import firebase from './Firebase'
 // 로그인 체크
-import CheckLogin from "./CheckLogin";
+import CheckLogin from "../common/CheckLogin";
+// Firebase
+import firebase from '../Firebase'
 // Header
 import Header from "./PeopleHeader";
 
@@ -73,14 +73,15 @@ const PeopleAdd = (props) => {
   const classes = useStyles();
   const [search, setSearch] = React.useState(null);
   const [friends, setFriends] = React.useState(null);
+  const { account } = props;
   const paramData = {
-    auth: props.children,
+    auth: account,
     search: search,
     friends: friends
   };
 
   // 로그인 체크
-  CheckLogin(props);
+  CheckLogin(account);
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
@@ -100,7 +101,7 @@ const PeopleAdd = (props) => {
 
   return (
     <>
-      <Header>add</Header>
+      <Header />
       <div className="people-add_div">
         <form onSubmit={handleOnSubmit}>
         <TextField

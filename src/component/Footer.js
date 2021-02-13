@@ -13,7 +13,7 @@ import LibraryBooks from '@material-ui/icons/LibraryBooks';
 
 // 컴포넌트
 // 흔적 남기기
-import Tracking from "./Tracking";
+import Tracking from "./tracking/Tracking";
 
 const useStyles = makeStyles((theme) => ({
   fabButton: {
@@ -92,7 +92,7 @@ const Footer = (props) => {
           <LibraryAdd />
           흔적 남기기
         </Button>{' '}
-        <Button variant="contained" color="primary" type="button" className="footer-button_library_books" onClick={() => handleOnLink("/trace/list")}>
+        <Button variant="contained" color="primary" type="button" className="footer-button_library_books" onClick={() => handleOnLink("/tracking/list")}>
           <LibraryBooks />
           내가 남긴 흔적
         </Button>

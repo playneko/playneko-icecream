@@ -1,7 +1,9 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 
-const PeopleList = () => {
+const TrackingView = (props) => {
+  const { account } = props;
+
   return (
     <>
       <p className="notfound-color_red">
@@ -18,4 +20,4 @@ const PeopleList = () => {
   );
 }
 
-export default PeopleList;
+export default TrackingView;

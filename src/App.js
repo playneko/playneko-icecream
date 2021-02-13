@@ -5,18 +5,24 @@ import { ThemeProvider } from '@material-ui/styles';
 import firebase from "firebase";
 
 // 컴포넌트
+// 마일 누적 처리
+import MileCounter from "./component/common/MileCounter";
 // 로그인
-import Login from "./component/Login";
+import Login from "./component/user/Login";
 // 맵 데이터 처리
-import Maps from "./component/Maps";
+import Maps from "./component/map/Maps";
 // 친구등록
-import PeopleAdd from "./component/PeopleAdd";
+import PeopleAdd from "./component/people/PeopleAdd";
 // 친구목록
-import PeopleList from "./component/PeopleList";
+import PeopleList from "./component/people/PeopleList";
 // 내가 남긴 흔적
-import TraceList from "./component/TraceList";
+import TrackingList from "./component/tracking/TrackingList";
+// 흔적 보기
+import TrackingView from "./component/tracking/TrackingView";
 // 404 NotFound
 import NotFound from "./component/NotFound";
+// 모델
+import UpdateUserInfoFire from "./models/UpdateUserInfoFire";
 // CSS
 import './styles/App.css';
 import './styles/Marker.css';
@@ -53,10 +59,11 @@ const UserData = (auth, setAuthInfo) => {
   .on("value", snapshot => {
     setAuthInfo({
       ...auth,
-      name: snapshot.val().name,
-      image: snapshot.val().image,
-      lat: snapshot.val().lat,
-      lng: snapshot.val().lng,
+      name: snapshot.val().name ? snapshot.val().name : "",
+      image: snapshot.val().image ? snapshot.val().image : "",
+      lat: snapshot.val().lat ? snapshot.val().lat : 0,
+      lng: snapshot.val().lng ? snapshot.val().lng : 0,
+      mile: snapshot.val().mile ? snapshot.val().mile : 0,
       user: true
     });
   });
@@ -65,13 +72,16 @@ const UserData = (auth, setAuthInfo) => {
 function App() {
   const classes = useStyles();
   const [myTheme, setMyTheme] = React.useState(colorTheme);
+  const [update, setUpdate] = React.useState(false);
   const [account, setAccount] = React.useState({
     auth: false,
     uid: "",
+    name: "",
     email: "",
     image: "",
     lat: 0,
     lng: 0,
+    mile: 0,
     user: false
   });
 
@@ -83,6 +93,14 @@ function App() {
       UserData(e, setAccount);
     }
   };
+
+  // 마일 누적 처리
+  MileCounter(account, setAccount, setUpdate);
+
+  // 마일 갱신처리
+  if (account != null && account.auth === true && update) {
+    UpdateUserInfoFire(account, setUpdate);
+  }
 
   return (
     <Router>
@@ -97,9 +115,10 @@ function App() {
               <Route exact path="/" render={() => <Maps>{{account: account, setAccount: setAccount}}</Maps>} /> :
               <Route exact path="/" render={() => <Login params={handleAuth} />} />
           }
-          <Route path="/people/add" render={() => <PeopleAdd>{account}</PeopleAdd>} />
-          <Route path="/people/list" render={() => <PeopleList>{account}</PeopleList>} />
-          <Route path="/trace/list" render={() => <TraceList>{account}</TraceList>} />
+          <Route path="/people/add" render={() => <PeopleAdd account={account} />} />
+          <Route path="/people/list" render={() => <PeopleList account={account} />} />
+          <Route path="/tracking/list" render={() => <TrackingList account={account} />} />
+          <Route path="/tracking/view/:id" render={() => <TrackingView account={account} />} />
           <Route path="/404" render={() => <NotFound />} />
           </Switch>
         </main>

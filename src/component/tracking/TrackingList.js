@@ -1,7 +1,9 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 
-const TraceList = () => {
+const TrackingList = (props) => {
+  const { account } = props;
+
   return (
     <>
       <p className="notfound-color_red">
@@ -18,4 +20,4 @@ const TraceList = () => {
   );
 }
 
-export default TraceList;
+export default TrackingList;

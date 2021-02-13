@@ -5,8 +5,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
 export default function Navibar(props) {
-  let history = useHistory();
-  const userData = props.params;
+  const { account } = props;
 
   return (
     <List>
