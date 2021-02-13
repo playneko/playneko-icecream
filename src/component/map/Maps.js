@@ -34,7 +34,6 @@ const DiffLocation = (myLocation, account, update, setAccount, setUpdate) => {
     if (update === true && !IsEmpty(account.lat) && !IsEmpty(account.lng)
         && (account.lat === myLocation.lat && account.lng === myLocation.lng)
         && (account.lat > 0 && account.lng > 0)) {
-        console.log(account);
         // 좌표 갱신처리
         UpdateUserInfoFire(account, setUpdate);
     }

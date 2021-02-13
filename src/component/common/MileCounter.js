@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 
 const MileCounter = (account, setAccount, setUpdate) => {
-    const [count, setCount] = React.useState(300);
+    const [count, setCount] = React.useState(600);
 
     useEffect(() => {
         let id = setInterval(() => {
@@ -19,7 +19,7 @@ const MileCounter = (account, setAccount, setUpdate) => {
         });
     }
 
-    count < 1 && setCount(300);
+    count < 1 && setCount(600);
 }
 
 export default MileCounter;

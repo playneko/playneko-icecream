@@ -16,9 +16,9 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 // 로그인 체크
 import CheckLogin from "../common/CheckLogin";
 // Firebase
-import firebase from '../Firebase'
+import firebase from '../Firebase';
 // Header
-import Header from "./PeopleHeader";
+import Header from "./Header";
 
 const useStyles = makeStyles((theme) => ({
   root: {
