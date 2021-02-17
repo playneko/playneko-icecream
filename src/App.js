@@ -17,12 +17,11 @@ import PeopleAdd from "./component/people/PeopleAdd";
 import PeopleList from "./component/people/PeopleList";
 // 내가 남긴 흔적
 import TrackingList from "./component/tracking/TrackingList";
-// 흔적 보기
-import TrackingView from "./component/tracking/TrackingView";
 // 404 NotFound
 import NotFound from "./component/NotFound";
 // 모델
 import UpdateUserInfoFire from "./models/UpdateUserInfoFire";
+import GetPeopleDataFire from "./models/GetPeopleDataFire";
 // CSS
 import './styles/App.css';
 import './styles/Marker.css';
@@ -84,6 +83,10 @@ function App() {
     mile: 0,
     user: false
   });
+  // 친구 데이터
+  const [peopleData, setPeopleData] = React.useState([]);
+  const [peopleAddFlg, setPeopleAddFlg] = React.useState(true);
+  let peopleDataArray = [];
 
   // 로그인 유무를 체크후 헤더에 넘겨주기
   const handleAuth = (e) => {
@@ -97,9 +100,23 @@ function App() {
   // 마일 누적 처리
   MileCounter(account, setAccount, setUpdate);
 
-  // 마일 갱신처리
   if (account != null && account.auth === true && update) {
+    // 마일 갱신처리
     UpdateUserInfoFire(account, setUpdate);
+  }
+  if (account != null && account.auth === true && peopleAddFlg) {
+    // 친구들 데이터 취득
+    GetPeopleDataFire(account, peopleData, setPeopleData, setPeopleAddFlg);
+  }
+  if (account != null && account.auth === true && !peopleAddFlg) {
+    // 중복 삭제
+    let values = [];
+    peopleDataArray = peopleData.filter(data => {
+        if (values.indexOf(data["uid"]) === -1) {
+            values.push(data["uid"]);
+            return data;
+        }
+    });
   }
 
   return (
@@ -112,13 +129,12 @@ function App() {
           <Switch>
           {
             account.auth && account.user ?
-              <Route exact path="/" render={() => <Maps>{{account: account, setAccount: setAccount}}</Maps>} /> :
+              <Route exact path="/" render={() => <Maps account={account} setAccount={setAccount} peopleDataArray={peopleDataArray} />} /> :
               <Route exact path="/" render={() => <Login params={handleAuth} />} />
           }
-          <Route path="/people/add" render={() => <PeopleAdd account={account} />} />
-          <Route path="/people/list" render={() => <PeopleList account={account} />} />
+          <Route path="/people/add" render={() => <PeopleAdd account={account} setPeopleAddFlg={setPeopleAddFlg} />} />
+          <Route path="/people/list" render={() => <PeopleList account={account} peopleDataArray={peopleDataArray} />} />
           <Route path="/tracking/list" render={() => <TrackingList account={account} />} />
-          <Route path="/tracking/view/:id" render={() => <TrackingView account={account} />} />
           <Route path="/404" render={() => <NotFound />} />
           </Switch>
         </main>

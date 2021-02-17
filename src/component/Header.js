@@ -73,7 +73,7 @@ const Header = (props) => {
   const theme = useTheme();
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const { account } = props;
+  const { account, setPeopleLocation, setUpdatePeople, peopleDataArray } = props;
 
   // 네비게이션 열기
   const handleDrawerOpen = () => {
@@ -125,7 +125,12 @@ const Header = (props) => {
         </div>
         <div className={classes.toolbar} />
         <Divider />
-        <Navibar account={account} />
+        <Navibar
+          account={account}
+          setPeopleLocation={setPeopleLocation}
+          setUpdatePeople={setUpdatePeople}
+          peopleDataArray={peopleDataArray}
+        />
       </Drawer>
     </div>
   );

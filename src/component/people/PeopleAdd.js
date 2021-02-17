@@ -30,8 +30,9 @@ const ListRender = (paramData) => {
   const auth = paramData.children.auth;
   const search = paramData.children.search;
   const lists = paramData.children.friends.data;
+  const setPeopleAddFlg = paramData.children.setPeopleAddFlg;
 
-  const handleOnPeopleAdd = (auth, uuid, data) => {
+  const handleOnPeopleAdd = (auth, uuid) => {
     let db = firebase.database();
     let ref = db.ref("/icecream_friends").child(auth.uid).child(uuid);
 
@@ -39,6 +40,8 @@ const ListRender = (paramData) => {
       uuid: uuid,
       tracking: 0
     });
+
+    setPeopleAddFlg(true);
   };
 
   return (
@@ -57,7 +60,7 @@ const ListRender = (paramData) => {
               <ListItemText id={idx} primary={lists[item].name} />
               <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="comments">
-                  <PersonAdd onClick={() => handleOnPeopleAdd(auth, item, lists[item])} />
+                  <PersonAdd onClick={() => handleOnPeopleAdd(auth, item)} />
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>
@@ -73,11 +76,12 @@ const PeopleAdd = (props) => {
   const classes = useStyles();
   const [search, setSearch] = React.useState(null);
   const [friends, setFriends] = React.useState(null);
-  const { account } = props;
+  const { account, setPeopleAddFlg } = props;
   const paramData = {
     auth: account,
     search: search,
-    friends: friends
+    friends: friends,
+    setPeopleAddFlg: setPeopleAddFlg
   };
 
   // 로그인 체크

@@ -15,7 +15,7 @@ router.post('/tracking/get', [
 
     const body = req.body;
     let sql = "";
-    sql += " SELECT no, uuid, title, comment, image, latitude, longitude, ";
+    sql += " SELECT no, uuid, title, comment, image, latitude, longitude, DATE_FORMAT(regdate, '%Y년%m월%d일 %H:%i:%s') as regdate, ";
     sql += " (6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance ";
     sql += " FROM icecream_tracking ";
     sql += " HAVING distance < 10 ";

@@ -1,13 +1,14 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import StarsIcon from '@material-ui/icons/Stars';
 
 const MarkerTracking = (props) => {
-    let history = useHistory();
-    const { idx, item } = props;
+    // let history = useHistory();
+    const { item, setTrackingView, setTrackingData } = props;
 
     const handleOnTrackingView = () => {
-        history.push("/tracking/view/" + item.no);
+        setTrackingView(true);
+        setTrackingData(item);
     };
 
     return (

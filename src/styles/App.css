@@ -14,6 +14,7 @@ button:focus {
     background: #ffffff;
     border: 5px solid #ffffff;
     border-radius: 10px !important;
+    box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%);
 }
 
 .header-root_mile {
@@ -191,6 +192,25 @@ button:focus {
     height: auto;
     max-width: 150px;
     max-height: 50px;
+}
+
+.tracking-view {
+    /* margin: 0 auto;
+    position: absolute;
+    top: calc(100vh - 90vh);
+    left: calc(100vw - 83vw); */
+    margin: 0 auto;
+    position: relative;
+    top: calc(100vh - 175vh);
+}
+
+.tracking-view_content {
+    height: 120px;
+    overflow: auto;
+}
+
+.tracking-view_content > p {
+    font-size: 0.7rem;
 }
 
 .notfound-color_red {

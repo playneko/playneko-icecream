@@ -15,6 +15,8 @@ import Footer from "../Footer";
 import MarkerUser from "../marker/MarkerUser";
 // 흔적
 import MarkerTracking from "../marker/MarkerTracking";
+// 흔적 보기
+import TrackingView from "../tracking/TrackingView";
 // 모델
 import UpdateUserInfoFire from "../../models/UpdateUserInfoFire";
 import TrackingGetModel from "../../models/TrackingGetModel";
@@ -28,7 +30,6 @@ const DiffLocation = (myLocation, account, update, setAccount, setUpdate) => {
             lat: myLocation.lat,
             lng: myLocation.lng
         });
-        setUpdate(true);
     }
 
     if (update === true && !IsEmpty(account.lat) && !IsEmpty(account.lng)
@@ -40,13 +41,14 @@ const DiffLocation = (myLocation, account, update, setAccount, setUpdate) => {
 }
 
 const Maps = (props) => {
-    const account = props.children.account;
-    const setAccount = props.children.setAccount;
+    const { account, setAccount, peopleDataArray } = props;
     // 맵 데이터
     const [myLocation, setMyLocation] = React.useState({
         lat: IsEmpty(account.lat) ? 0 : account.lat,
         lng: IsEmpty(account.lng) ? 0 : account.lng
     });
+    // 친구 좌표 데이터
+    const [peopleLocation, setPeopleLocation] = React.useState({lat: 0, lng: 0});
     // 에러
     const [error, setError] = React.useState(null);
     // 로딩
@@ -55,8 +57,14 @@ const Maps = (props) => {
     const [tracking, setTracking] = React.useState(null);
     // 좌표 갱신
     const [update, setUpdate] = React.useState(false);
+    // 친구 좌표로 이동
+    const [updatePeople, setUpdatePeople] = React.useState(false);
     // 좌표 취득 플래그
     const [gpsFlg, setGpsFlg] = React.useState(myLocation.lat < 1 || myLocation.lng < 1 ? 1 : 0);
+    // 흔적 보기
+    const [trackingView, setTrackingView] = React.useState(false);
+    // 흔적 데이터
+    const [trackingData, setTrackingData] = React.useState(null);
 
     if (gpsFlg === 1) {
         // 좌표 계속 취득
@@ -64,6 +72,8 @@ const Maps = (props) => {
     } else if (gpsFlg === 9) {
         // 현재 좌표 이동
         Geolocation(setMyLocation);
+        setUpdatePeople(false);
+        setUpdate(true);
         setGpsFlg(0);
     }
 
@@ -73,25 +83,36 @@ const Maps = (props) => {
     // 현재 좌표 갱신
     DiffLocation(myLocation, account, update, setAccount, setUpdate);
 
-    const markerTracking = !IsEmpty(tracking) && tracking.map((item, idx) => {
+    // 흔적 데이터 표시
+    const markerTracking = !IsEmpty(tracking) && tracking.map((item) => {
         return (<MarkerTracking
+            item={item}
             lat={item.latitude}
             lng={item.longitude}
-            idx={idx}
+            setTrackingView={setTrackingView}
+            setTrackingData={setTrackingData}
+        />);
+    });
+
+    // 친구 데이터 표시
+    const markerPeople = !IsEmpty(peopleDataArray) && peopleDataArray.map((item, idx) => {
+        return (<MarkerUser
             item={item}
+            lat={item.lat}
+            lng={item.lng}
+            idx={idx}
+            name={item.name}
+            avatar={item.image}
         />);
     });
 
     return (
         <>
             <CssBaseline />
-            {!loading && <Header account={account} />}
+            { !loading && <Header account={account} setPeopleLocation={setPeopleLocation} setUpdatePeople={setUpdatePeople} peopleDataArray={peopleDataArray} /> }
             <div style={{ height: 'calc(100vh - 13vh)', width: '100%' }}>
             {
-                loading ?
-                <>
-                </>
-                :
+                loading ? <></> :
                 <>
                     <GoogleMapReact
                         options={{
@@ -101,7 +122,7 @@ const Maps = (props) => {
                         }}
                         defaultZoom={16}
                         defaultCenter={myLocation}
-                        center={[myLocation.lat, myLocation.lng]}
+                        center={updatePeople ? [peopleLocation.lat, peopleLocation.lng] : [myLocation.lat, myLocation.lng]}
                         bootstrapURLKeys={{ key: 'AIzaSyDBa3kj6nwgmiUdCCNA1fhWHRttnpFTpww' }}
                     >
                         <MarkerUser
@@ -111,27 +132,21 @@ const Maps = (props) => {
                             name={account.name}
                             avatar={account.image}
                         />
-                        <MarkerUser
-                            lat="35.7023391"
-                            lng="139.8187216"
-                            idx="1"
-                            name="MyMarkertesttesttesttest"
-                            avatar={account.image}
-                        />
-                        <MarkerUser
-                            lat="35.7253048"
-                            lng="139.7378776"
-                            idx="2"
-                            name="MyMarkertesttesttesttest"
-                            avatar={account.image}
-                        />
+                        {markerPeople}
                         {markerTracking}
                     </GoogleMapReact>
                     <Footer
                         account={account}
                         gpsFlg={gpsFlg}
                         setGpsFlg={setGpsFlg}
+                        setTrackingView={setTrackingView}
                     />
+                    { trackingView && <TrackingView
+                        account={account}
+                        trackingData={trackingData}
+                        setTrackingView={setTrackingView}
+                        setTrackingData={setTrackingData}
+                    /> }
                 </>
             }
             </div>

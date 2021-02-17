@@ -39,21 +39,22 @@ const useStyles = makeStyles((theme) => ({
 const Footer = (props) => {
   let history = useHistory();
   const classes = useStyles();
-  const { account, gpsFlg, setGpsFlg } = props;
+  const { account, gpsFlg, setGpsFlg, setTrackingView } = props;
   const [addopen, setAddopen] = React.useState(false);
   const [tracking, setTracking] = React.useState(false);
 
   const handleOnGps = () => {
     setGpsFlg(9);
   }
-  const handleOnExplore = () => {
-    if (gpsFlg === 1) {
-      setGpsFlg(0);
-    } else {
-      setGpsFlg(1);
-    }
-  }
+  // const handleOnExplore = () => {
+  //   if (gpsFlg === 1) {
+  //     setGpsFlg(0);
+  //   } else {
+  //     setGpsFlg(1);
+  //   }
+  // }
   const handleOnAddForm = () => {
+    setTrackingView(false);
     addopen ? setAddopen(false) : setAddopen(true);
   }
 
@@ -106,17 +107,17 @@ const Footer = (props) => {
       }
       {
         gpsFlg < 1 ?
-          <Fab color="secondary" className={classes.absolute1 + " footer-fab_gps"} onClick={() => handleOnGps()}>
+          <Fab color="secondary" className={classes.absolute2 + " footer-fab_gps"} onClick={() => handleOnGps()}>
             <GpsFixed />
           </Fab>
         : ""
       }
       {
-        gpsFlg < 1 || gpsFlg === 1 ?
-          <Fab color="secondary" className={gpsFlg < 1 ? classes.absolute2 + " footer-fab_explore_open" : classes.absolute2 + " footer-fab_explore_close"} onClick={() => handleOnExplore()}>
-            <Explore />
-          </Fab>
-        : ""
+        // gpsFlg < 1 || gpsFlg === 1 ?
+        //   <Fab color="secondary" className={gpsFlg < 1 ? classes.absolute2 + " footer-fab_explore_open" : classes.absolute2 + " footer-fab_explore_close"} onClick={() => handleOnExplore()}>
+        //     <Explore />
+        //   </Fab>
+        // : ""
       }
     </>
   );
