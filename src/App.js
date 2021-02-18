@@ -17,6 +17,8 @@ import PeopleAdd from "./component/people/PeopleAdd";
 import PeopleList from "./component/people/PeopleList";
 // 내가 남긴 흔적
 import TrackingList from "./component/tracking/TrackingList";
+// 채팅방
+import ChatRoom from "./component/chating/ChatRoom";
 // 404 NotFound
 import NotFound from "./component/NotFound";
 // 모델
@@ -135,6 +137,7 @@ function App() {
           <Route path="/people/add" render={() => <PeopleAdd account={account} setPeopleAddFlg={setPeopleAddFlg} />} />
           <Route path="/people/list" render={() => <PeopleList account={account} peopleDataArray={peopleDataArray} />} />
           <Route path="/tracking/list" render={() => <TrackingList account={account} />} />
+          <Route path="/chat/:id" render={() => <ChatRoom account={account} />} />
           <Route path="/404" render={() => <NotFound />} />
           </Switch>
         </main>

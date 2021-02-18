@@ -3,8 +3,8 @@ import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
 import ArrowBackIos from '@material-ui/icons/ArrowBackIos';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = () => {
+const Header = (props) => {
   let history = useHistory();
   const classes = useStyles();
 
@@ -30,7 +30,7 @@ const Header = () => {
   };
 
   return (
-    <div className={classes.root + " header"}>
+    <div className={classes.root + " header-chat_room"}>
       <AppBar position="static">
         <Toolbar>
           <div className="header-people_back">
@@ -39,7 +39,7 @@ const Header = () => {
             </IconButton>
           </div>
           <Typography variant="h6" className={classes.title}>
-            ともだち追加
+            トーク
           </Typography>
         </Toolbar>
       </AppBar>

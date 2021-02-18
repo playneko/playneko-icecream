@@ -213,6 +213,112 @@ button:focus {
     font-size: 0.7rem;
 }
 
+.chat-room-list_top {
+    padding-top: 60px !important;
+}
+
+.chat-room-list_bottom {
+    padding-bottom: 50px !important;
+}
+
+.chat-room_bubble_avatar {
+    margin-bottom: auto;
+    min-width: 35px !important;
+}
+
+.chat-room_bubble_avatar > div {
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.chat-room_bubble_left {
+    padding: 5px;
+    width: auto;
+    font-size: 10px;
+    color: #4c4c4c;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 7px;
+    white-space: pre-line;
+    background: #e8e8e8;
+    border: 1px solid #e8e8e8;
+    border-top-left-radius: 0px;
+}
+
+.chat-room_bubble_right {
+    padding: 5px;
+    width: auto;
+    font-size: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 7px;
+    white-space: pre-line;
+    background: #ffde3f;
+    border: 1px solid #ffde3f;
+    border-bottom-right-radius: 0px;
+}
+
+.chat-room_emoji_left, .chat-room_emoji_right {
+    width: auto;
+}
+
+.chat-room_emoji_left > img, .chat-room_emoji_right > img {
+    width: 100px;
+}
+
+.chat-room_bubble_name_left {
+    padding: 2px;
+    font-size: 9px;
+}
+
+.chat-room_bubble_time_left {
+    font-size: 9px;
+    margin-top: auto;
+    margin-bottom: 0;
+    padding-left: 5px;
+}
+
+.chat-room_bubble_time_right {
+    font-size: 9px;
+    margin-top: auto;
+    margin-left: auto;
+    margin-bottom: 0;
+    padding-right: 5px;
+}
+
+.footer-chat_room > div > div > span {
+    height: 0px;
+}
+
+.footer-chat_room {
+    bottom: 0;
+    width: 100%;
+    height: 45px;
+    z-index: 9999;
+    max-width: 100%;
+    position: fixed;
+}
+
+.footer-chat_room > form > div {
+    padding-top: 0px;
+    margin-left: 0 !important;
+    background-color: unset !important;
+}
+
+.footer-chat_room > form > div > div {
+    color: #ffffff;
+    margin: unset !important;
+    padding: 8px 7px 9px !important;
+}
+
+.footer-chat_room_fieldset {
+    border: 0px;
+}
+
+.footer-chat_room_fieldset > fieldset {
+    border: 0px;
+}
+
 .notfound-color_red {
     text-align: center;
     color: #c00000 !important;

@@ -1,6 +1,8 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
 
 const MarkerUser = (props) => {
+    let history = useHistory();
     const colorList = [
         "#ff4c6d", "#3d5afe", "#66bb6a", "#ff8a80",
         "#bdbdbd", "#ef5350", "#ec407a", "#26a69a",
@@ -8,7 +10,11 @@ const MarkerUser = (props) => {
         "#ffca28", "#9ccc65", "#d4e157", "#8d6e63",
         "#bdbdbd", "#ffa726", "#ff7043", "#82b1ff"
     ];
-    const { idx, name, avatar } = props;
+    const { item, idx, name, avatar } = props;
+
+    const handleOnChatting = () => {
+        history.push("/chat/" + item.uid);
+    };
 
     return (
         <div>
@@ -25,6 +31,7 @@ const MarkerUser = (props) => {
                     cursor: 'pointer'
                 }}
                 title={name}
+                onClick={() => handleOnChatting()}
             >
                 <div
                     className="pin_avatar"
